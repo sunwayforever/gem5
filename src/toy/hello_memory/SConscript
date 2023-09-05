@@ -1,0 +1,4 @@
+Import("*")
+
+SimObject("SimpleMemoryObject.py", sim_objects=["SimpleMemoryObject"])
+Source("simple_memory_object.cc")
