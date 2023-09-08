@@ -5,7 +5,7 @@ from m5.util import addToPath
 addToPath("../")
 from common.Caches import *
 
-system = System()
+system = System(cache_line_size=64)
 
 system.clk_domain = SrcClockDomain()
 system.clk_domain.clock = "1GHz"

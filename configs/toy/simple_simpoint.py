@@ -9,9 +9,10 @@ system.clk_domain.voltage_domain = VoltageDomain()
 
 system.mem_mode = "timing"
 system.mem_ranges = [AddrRange("512MB")]
-system.cpu = RiscvO3CPU()
-
+system.cpu = RiscvAtomicSimpleCPU()
+system.cpu.addSimPointProbe(20)
 system.membus = SystemXBar()
+system.mem_mode = "atomic"
 
 system.cpu.icache_port = system.membus.cpu_side_ports
 system.cpu.dcache_port = system.membus.cpu_side_ports
@@ -40,17 +41,6 @@ system.cpu.workload = process
 system.cpu.createThreads()
 
 root = Root(full_system=False, system=system)
-
-# m5.instantiate()
-# print("Beginning simulation!")
-# exit_event = m5.simulate(69900000)
-# print("Exiting @ tick %i because %s" % (m5.curTick(), exit_event.getCause()))
-# m5.checkpoint("/tmp/1.ckpt")
-
-# m5.instantiate("/tmp/1.ckpt")
-# print("Beginning simulation!")
-# exit_event = m5.simulate()
-# print("Exiting @ tick %i because %s" % (m5.curTick(), exit_event.getCause()))
 
 m5.instantiate()
 print("Beginning simulation!")
